@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ahmad Al-Horani — Pasar Jawi VR Portfolio</title>
+  
+  <!-- Tailwind CSS & Typography -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            studio: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              700: '#334155',
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#0b1120'
+            },
+            accent: {
+              amber: '#d97706',
+              warm: '#f59e0b',
+              emerald: '#10b981',
+              indigo: '#6366f1'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: #0c101a;
+      color: #e2e8f0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100vw;
+    }
+    
+    .studio-card {
+      background: rgba(18, 24, 38, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+    .studio-card-subtle {
+      background: rgba(15, 20, 32, 0.72);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(12, 16, 26, 0.8); }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.28); }
+
+    .photo-frame {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body class="relative w-screen h-screen overflow-hidden flex flex-col">
+
+  <!-- Top Navigation Header -->
+  <header class="relative z-30 flex items-center justify-between px-4 py-3 sm:px-6 sm:py-3.5 border-b border-white/5 studio-card-subtle shrink-0">
+    <div class="flex items-center space-x-3.5">
+      <button onclick="teleportToStation('about')" class="group relative block focus:outline-none" title="View Profile">
+        <div class="w-11 h-11 rounded-full p-[2px] bg-gradient-to-br from-amber-500/60 via-slate-700 to-indigo-500/40 transition-transform duration-200 group-hover:scale-105 photo-frame overflow-hidden">
+          <img 
+            id="header-avatar-img" 
+            src="https://placehold.co/140x140/1e293b/e2e8f0?text=Ahmad" 
+            alt="Ahmad Al-Horani portrait" 
+            class="w-full h-full object-cover rounded-full"
+            onerror="this.src='https://placehold.co/140x140/1e293b/e2e8f0?text=AH'"
+          >
+        </div>
+        <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[#0c101a]"></span>
+      </button>
+
+      <div>
+        <div class="flex items-center space-x-2">
+          <h1 class="text-sm sm:text-base font-bold text-white tracking-tight">Ahmad Al-Horani</h1>
+          <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 font-medium">
+            VR Developer
+          </span>
+        </div>
+        <p class="text-[12px] text-slate-400 font-normal hidden sm:flex items-center gap-1.5 mt-0.5">
+          <span>Multimedia University Cyberjaya</span>
+          <span class="text-slate-600">•</span>
+          <span class="text-slate-300">Pasar Jawi VR Project</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-2 sm:space-x-3">
+      <nav class="hidden lg:flex items-center space-x-1 bg-slate-900/80 p-1 rounded-xl border border-white/5 text-xs font-medium">
+        <button onclick="teleportToStation('projects')" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center space-x-1.5">
+          <i class="fas fa-vr-cardboard text-amber-400 text-xs"></i>
+          <span>Pasar Jawi VR</span>
+        </button>
+        <button onclick="teleportToStation('about')" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center space-x-1.5">
+          <i class="fas fa-user text-indigo-400 text-xs"></i>
+          <span>About</span>
+        </button>
+        <button onclick="teleportToStation('tech')" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center space-x-1.5">
+          <i class="fas fa-code text-emerald-400 text-xs"></i>
+          <span>Tech Stack</span>
+        </button>
+        <button onclick="teleportToStation('contact')" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center space-x-1.5">
+          <i class="fas fa-envelope text-blue-400 text-xs"></i>
+          <span>Contact</span>
+        </button>
+      </nav>
+
+      <button id="sfx-toggle-btn" class="w-9 h-9 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-white/5 flex items-center justify-center text-slate-400 hover:text-white transition-all" title="Toggle audio feedback">
+        <i id="sfx-icon" class="fas fa-volume-up text-xs text-amber-400"></i>
+      </button>
+
+      <button id="document-toggle-btn" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-medium text-xs border border-white/10 flex items-center space-x-2 transition-all">
+        <i class="fas fa-file-alt text-amber-300"></i>
+        <span>Standard View</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Interactive Floorplan Canvas -->
+  <main class="relative flex-1 w-full h-full overflow-hidden bg-[#0c101a]">
+    <canvas id="studio-canvas" class="absolute inset-0 w-full h-full block cursor-pointer"></canvas>
+
+    <!-- Contextual Interaction Prompt Button -->
+    <div id="station-prompt" class="absolute bottom-20 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 opacity-0 pointer-events-none transition-all duration-300">
+      <button id="station-action-btn" class="studio-card px-5 py-2.5 rounded-full flex items-center space-x-3 pointer-events-auto border border-amber-500/40 hover:border-amber-400 shadow-xl cursor-pointer active:scale-95 transition-all">
+        <kbd class="px-2 py-0.5 bg-amber-500/20 border border-amber-500/40 rounded font-mono text-xs text-amber-300 font-semibold">E</kbd>
+        <span id="station-prompt-label" class="text-xs font-semibold text-slate-100 tracking-wide">VIEW STATION</span>
+      </button>
+    </div>
+
+    <!-- Mobile Virtual Controls -->
+    <div class="absolute bottom-5 left-5 z-20 md:hidden flex items-center space-x-3">
+      <div id="touch-dpad" class="w-24 h-24 rounded-full studio-card flex items-center justify-center relative touch-none border border-white/10">
+        <div id="touch-stick" class="w-9 h-9 rounded-full bg-amber-500/80 border border-white/40 shadow-sm transition-transform duration-75"></div>
+      </div>
+    </div>
+    <div class="absolute bottom-6 right-5 z-20 md:hidden flex items-center space-x-2">
+      <button id="mobile-action-btn" class="w-14 h-14 rounded-2xl studio-card border border-amber-500/40 flex flex-col items-center justify-center text-amber-400 active:scale-90 shadow-lg">
+        <i class="fas fa-hand-pointer text-sm"></i>
+        <span class="text-[9px] font-mono mt-0.5 font-bold">OPEN</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- Interactive Modal Container -->
+  <div id="station-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md">
+    <div id="modal-container" class="relative w-full max-w-4xl max-h-[90vh] studio-card rounded-3xl border border-white/10 flex flex-col overflow-hidden transition-all duration-200 transform scale-95 opacity-0 text-slate-100">
+      
+      <div class="px-6 py-4 border-b border-white/10 bg-slate-900/60 flex items-center justify-between shrink-0">
+        <div class="flex items-center space-x-3">
+          <div id="modal-badge-icon" class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-base">
+            <i class="fas fa-cube"></i>
+          </div>
+          <div>
+            <h2 id="modal-title" class="text-base font-bold text-white tracking-tight">Station Name</h2>
+            <p id="modal-subtitle" class="text-xs text-slate-400 font-normal">Section Category</p>
+          </div>
+        </div>
+        <button id="modal-close-btn" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+          <i class="fas fa-times text-xs"></i>
+        </button>
+      </div>
+
+      <div id="modal-body" class="p-6 overflow-y-auto flex-1 text-slate-200 text-sm"></div>
+
+      <div class="px-6 py-3 border-t border-white/5 bg-slate-900/40 flex items-center justify-between text-xs text-slate-400">
+        <span class="flex items-center gap-1.5"><i class="fas fa-keyboard text-amber-400"></i> Press [ESC] or click close to return to floor</span>
+        <span class="font-mono text-[11px] text-slate-500">ahmad-vr.portfolio</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Standard Clean Portfolio View (Document Mode) -->
+  <div id="document-view" class="fixed inset-0 z-50 hidden overflow-y-auto bg-[#0c101a] text-slate-200">
+    <div class="max-w-4xl mx-auto px-5 py-10 sm:px-10 sm:py-16">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-8 mb-8 border-b border-white/10 gap-4">
+        <div class="flex items-center space-x-4">
+          <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden photo-frame bg-slate-800 shrink-0">
+            <img 
+              id="doc-avatar-img"
+              src="https://placehold.co/160x160/1e293b/e2e8f0?text=Ahmad" 
+              alt="Ahmad Al-Horani portrait" 
+              class="w-full h-full object-cover"
+              onerror="this.src='https://placehold.co/160x160/1e293b/e2e8f0?text=AH'"
+            >
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Ahmad Sharaf El Deen Sami Al-Horani</h1>
+              <span class="w-2 h-2 rounded-full bg-emerald-500" title="Active"></span>
+            </div>
+            <p class="text-sm text-amber-400 font-medium mt-0.5">Virtual Reality & Interactive Systems Developer</p>
+            <p class="text-xs text-slate-400 mt-0.5">Multimedia University Cyberjaya • Faculty of Computing & Informatics</p>
+          </div>
+        </div>
+
+        <button id="exit-document-btn" class="self-start sm:self-center px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-medium text-xs flex items-center space-x-2 transition-all border border-white/10">
+          <i class="fas fa-compass text-amber-400"></i>
+          <span>Return to Floor</span>
+        </button>
+      </div>
+
+      <!-- About Section -->
+      <section class="studio-card rounded-2xl p-6 sm:p-8 mb-8">
+        <h2 class="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold mb-3">About & Focus</h2>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-normal mb-4">
+          I am a final-year Bachelor of Multimedia (Virtual Reality) student and Project Lead at Multimedia University (MMU) Cyberjaya. My work centers on educational VR and gamified learning systems, translating structured learning goals into spatial, interactive applications.
+        </p>
+        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+          In Pasar Jawi, I designed and programmed the mechanics for recognizing and writing Jawi script using Unity 3D, XR Interaction Toolkit, and Meta XR SDK. The focus is on real-time feedback, gesture recognition, and responsive 3D tracking.
+        </p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-white/10 text-xs">
+          <div>
+            <span class="block text-slate-500 font-mono text-[10px]">DEGREE</span>
+            <span class="font-medium text-white">B.MM (Virtual Reality)</span>
+          </div>
+          <div>
+            <span class="block text-slate-500 font-mono text-[10px]">INSTITUTION</span>
+            <span class="font-medium text-white">MMU Cyberjaya</span>
+          </div>
+          <div>
+            <span class="block text-slate-500 font-mono text-[10px]">CORE PLATFORM</span>
+            <span class="font-medium text-white">Unity 3D & Meta XR</span>
+          </div>
+          <div>
+            <span class="block text-slate-500 font-mono text-[10px]">LOCATION</span>
+            <span class="font-medium text-white">Selangor, Malaysia</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Project -->
+      <section class="mb-10">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold">Featured Project</h2>
+          <span class="text-xs text-slate-500 font-mono">Degree FYP</span>
+        </div>
+        <div id="doc-projects-container" class="space-y-4"></div>
+      </section>
+
+      <!-- Technical Stack Details -->
+      <section class="studio-card rounded-2xl p-6 sm:p-8 mb-10">
+        <h2 class="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold mb-4">Core Competencies & Stack</h2>
+        <div id="doc-skills-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+      </section>
+
+      <!-- Contact Action -->
+      <section class="studio-card rounded-2xl p-6 sm:p-8 text-center border border-amber-500/20">
+        <h2 class="text-base sm:text-lg font-bold text-white mb-2">Get in touch</h2>
+        <p class="text-xs sm:text-sm text-slate-400 mb-6 max-w-lg mx-auto">
+          Open for VR development opportunities, technical inquiries, and project discussions.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <button onclick="copyEmailToClipboard()" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs transition-colors flex items-center space-x-2 shadow-lg shadow-amber-500/20">
+            <i class="fas fa-copy"></i>
+            <span>Copy Direct Contact</span>
+          </button>
+          <button onclick="showToast('CV READY', 'CV download action initialized...', 'fa-file-pdf')" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/10 text-xs font-medium flex items-center space-x-2 transition-colors">
+            <i class="fas fa-download"></i>
+            <span>Download CV</span>
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast-banner" class="fixed top-16 right-4 z-50 transform translate-x-80 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="studio-card px-4 py-3 rounded-2xl border border-amber-500/40 flex items-center space-x-3 text-slate-100 shadow-2xl">
+      <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs">
+        <i id="toast-icon" class="fas fa-bell"></i>
+      </div>
+      <div>
+        <div id="toast-title" class="font-bold text-xs text-white">UPDATE</div>
+        <div id="toast-msg" class="text-[11px] text-slate-400">Action confirmation</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    class TactileSynth {
+      constructor() {
+        this.ctx = null;
+        this.muted = false;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContext();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+      playStep() {
+        if (this.muted) return;
+        this.init();
+        try {
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(80 + Math.random() * 20, t);
+          osc.frequency.exponentialRampToValueAtTime(30, t + 0.04);
+          gain.gain.setValueAtTime(0.015, t);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.04);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.05);
+        } catch (e) {}
+      }
+      playSoftClick() {
+        if (this.muted) return;
+        this.init();
+        try {
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, t);
+          osc.frequency.exponentialRampToValueAtTime(780, t + 0.08);
+          gain.gain.setValueAtTime(0.04, t);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.14);
+        } catch (e) {}
+      }
+      playPop() {
+        if (this.muted) return;
+        this.init();
+        try {
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(300, t);
+          osc.frequency.exponentialRampToValueAtTime(150, t + 0.07);
+          gain.gain.setValueAtTime(0.05, t);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.08);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.09);
+        } catch (e) {}
+      }
+    }
+    const audio = new TactileSynth();
+
+    const sfxBtn = document.getElementById('sfx-toggle-btn');
+    const sfxIcon = document.getElementById('sfx-icon');
+    sfxBtn.addEventListener('click', () => {
+      audio.muted = !audio.muted;
+      if (audio.muted) {
+        sfxIcon.className = "fas fa-volume-mute text-xs text-slate-500";
+        showToast("AUDIO OFF", "Sound feedback muted", "fa-volume-mute");
+      } else {
+        sfxIcon.className = "fas fa-volume-up text-xs text-amber-400";
+        audio.playSoftClick();
+        showToast("AUDIO ACTIVE", "Tactile sounds enabled", "fa-volume-up");
+      }
+    });
+
+    const PORTFOLIO_DATA = {
+      developer: {
+        name: "Ahmad Sharaf El Deen Sami Al-Horani",
+        title: "Virtual Reality & Interactive Systems Developer",
+        photo: "https://placehold.co/400x400/1e293b/e2e8f0?text=Ahmad+Al-Horani",
+        location: "Cyberjaya / Selangor, Malaysia",
+        status: "Open for VR Engineering & Interactive Media Roles",
+        bio: "Final-year Bachelor of Multimedia (Virtual Reality) student and Project Lead at Multimedia University Cyberjaya. Focused on creating functional VR applications, educational gamification, and interactive mechanics using Unity 3D and XR toolkits.",
+        projectRole: "Lead developer and project lead for Pasar Jawi (JawiQuest), handling gameplay programming, tracing system architecture, and user testing.",
+        attributes: [
+          { label: "University", val: "MMU Cyberjaya" },
+          { label: "Degree Program", val: "B.MM Virtual Reality" },
+          { label: "Primary Engine", val: "Unity 3D / C#" },
+          { label: "FYP Project Role", val: "Project Lead" }
+        ]
+      },
+      project: {
+        id: "pasarjawi",
+        title: "PASAR JAWI (JAWIQUEST)",
+        category: "Educational Virtual Reality Application (Final Year Degree Project)",
+        role: "Project Lead & Core VR Developer",
+        desc: "An educational virtual reality game designed to teach the recognition and writing of Jawi letters. Set in an interactive marketplace environment, users complete learning tasks and interact with letter-tracing mechanics to reinforce letter recognition.",
+        technicalOverview: "Developed in Unity 3D using the XR Interaction Toolkit and Meta XR SDK. The core mechanism is a 3D spatial tracing system that evaluates user stroke accuracy against predefined spline paths and provides immediate visual feedback.",
+        highlights: [
+          "Real-time stroke evaluation and spline-guided tracing mechanics in 6-DOF space.",
+          "Contextual marketplace environment with interactive props and objective-driven levels.",
+          "Evaluation supported by an empirical study with 43 university student respondents analyzing learning motivation."
+        ],
+        tags: ["Unity 3D", "C#", "XR Interaction Toolkit", "Meta XR SDK", "Spatial Tracing", "Gamified Learning"],
+        github: "https://github.com/ParticularPerson",
+        demo: "#"
+      },
+      skills: [
+        { name: "Unity 3D & C# Scripting", level: 92 },
+        { name: "XR Interaction Toolkit & Meta XR SDK", level: 90 },
+        { name: "Spatial Tracing & Stroke Validation Logic", level: 88 },
+        { name: "Educational Gamification & Task Design", level: 86 },
+        { name: "OpenXR & Motion Controller Interactions", level: 85 },
+        { name: "Git Version Control", level: 85 }
+      ]
+    };
+
+    const stations = [
+      {
+        id: 'about',
+        name: 'Profile & Background',
+        subtitle: 'MMU Student & Project Lead',
+        icon: 'fa-user',
+        color: '#f59e0b',
+        x: 0.50,
+        y: 0.30,
+        radius: 38
+      },
+      {
+        id: 'projects',
+        name: 'Pasar Jawi VR',
+        subtitle: 'Educational VR Learning System',
+        icon: 'fa-vr-cardboard',
+        color: '#d97706',
+        x: 0.25,
+        y: 0.58,
+        radius: 38
+      },
+      {
+        id: 'tech',
+        name: 'Tech Stack',
+        subtitle: 'Unity 3D, XR SDKs & Tools',
+        icon: 'fa-code',
+        color: '#10b981',
+        x: 0.75,
+        y: 0.58,
+        radius: 38
+      },
+      {
+        id: 'contact',
+        name: 'Contact & Info',
+        subtitle: 'Direct Inquiries & CV',
+        icon: 'fa-envelope',
+        color: '#6366f1',
+        x: 0.50,
+        y: 0.80,
+        radius: 38
+      }
+    ];
+
+    const canvas = document.getElementById('studio-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = canvas.parentElement.clientWidth * dpr;
+      canvas.height = canvas.parentElement.clientHeight * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const player = {
+      x: 0.5,
+      y: 0.52,
+      targetX: 0.5,
+      targetY: 0.52,
+      vx: 0,
+      vy: 0,
+      speed: 0.0036,
+      radius: 12,
+      heading: 0,
+      walkCycle: 0,
+      stepTimer: 0
+    };
+
+    const dustMotes = [];
+    for (let i = 0; i < 25; i++) {
+      dustMotes.push({
+        x: Math.random(),
+        y: Math.random(),
+        size: Math.random() * 2 + 1,
+        vx: (Math.random() - 0.5) * 0.0002,
+        vy: (Math.random() - 0.5) * 0.0002,
+        alpha: Math.random() * 0.4 + 0.1
+      });
+    }
+
+    const keys = { w: false, a: false, s: false, d: false };
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('station-modal');
+      const docView = document.getElementById('document-view');
+      if (!modal.classList.contains('hidden') || !docView.classList.contains('hidden')) {
+        if (e.key === 'Escape') {
+          closeModal();
+          exitDocumentView();
+        }
+        return;
+      }
+      if (['KeyW', 'ArrowUp'].includes(e.code)) keys.w = true;
+      if (['KeyA', 'ArrowLeft'].includes(e.code)) keys.a = true;
+      if (['KeyS', 'ArrowDown'].includes(e.code)) keys.s = true;
+      if (['KeyD', 'ArrowRight'].includes(e.code)) keys.d = true;
+      if (e.code === 'KeyE') triggerStationInteraction();
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (['KeyW', 'ArrowUp'].includes(e.code)) keys.w = false;
+      if (['KeyA', 'ArrowLeft'].includes(e.code)) keys.a = false;
+      if (['KeyS', 'ArrowDown'].includes(e.code)) keys.s = false;
+      if (['KeyD', 'ArrowRight'].includes(e.code)) keys.d = false;
+    });
+
+    canvas.addEventListener('pointerdown', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const normX = (e.clientX - rect.left) / rect.width;
+      const normY = (e.clientY - rect.top) / rect.height;
+      player.targetX = Math.max(0.1, Math.min(0.9, normX));
+      player.targetY = Math.max(0.12, Math.min(0.88, normY));
+    });
+
+    const dpad = document.getElementById('touch-dpad');
+    const stick = document.getElementById('touch-stick');
+    let touchOrigin = null;
+    let touchActive = false;
+
+    if (dpad) {
+      dpad.addEventListener('touchstart', (e) => {
+        touchActive = true;
+        const rect = dpad.getBoundingClientRect();
+        touchOrigin = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+        handleTouch(e.touches[0]);
+      }, { passive: false });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!touchActive) return;
+        handleTouch(e.touches[0]);
+      }, { passive: false });
+
+      window.addEventListener('touchend', () => {
+        if (!touchActive) return;
+        touchActive = false;
+        stick.style.transform = `translate(0px, 0px)`;
+        keys.w = keys.a = keys.s = keys.d = false;
+      });
+
+      function handleTouch(t) {
+        const dx = t.clientX - touchOrigin.x;
+        const dy = t.clientY - touchOrigin.y;
+        const dist = Math.hypot(dx, dy);
+        const maxDist = 32;
+        const clampedDist = Math.min(dist, maxDist);
+        const angle = Math.atan2(dy, dx);
+        stick.style.transform = `translate(${Math.cos(angle) * clampedDist}px, ${Math.sin(angle) * clampedDist}px)`;
+        
+        keys.w = dy < -10;
+        keys.s = dy > 10;
+        keys.a = dx < -10;
+        keys.d = dx > 10;
+      }
+    }
+
+    document.getElementById('mobile-action-btn').addEventListener('click', triggerStationInteraction);
+    document.getElementById('station-action-btn').addEventListener('click', triggerStationInteraction);
+
+    let activeNearStation = null;
+
+    window.teleportToStation = function(stationId) {
+      const target = stations.find(s => s.id === stationId);
+      if (target) {
+        player.x = target.x;
+        player.y = target.y + 0.08;
+        player.targetX = player.x;
+        player.targetY = player.y;
+        audio.playSoftClick();
+        openStationModal(target);
+      }
+    };
+
+    function triggerStationInteraction() {
+      if (activeNearStation) {
+        audio.playSoftClick();
+        openStationModal(activeNearStation);
+      }
+    }
+
+    let lastTime = performance.now();
+
+    function renderStudioLoop(now) {
+      const dt = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+
+      const w = canvas.parentElement.clientWidth;
+      const h = canvas.parentElement.clientHeight;
+
+      let moveX = 0;
+      let moveY = 0;
+      if (keys.w) moveY -= 1;
+      if (keys.s) moveY += 1;
+      if (keys.a) moveX -= 1;
+      if (keys.d) moveX += 1;
+
+      if (moveX !== 0 || moveY !== 0) {
+        const len = Math.hypot(moveX, moveY);
+        player.vx = (moveX / len) * player.speed;
+        player.vy = (moveY / len) * player.speed;
+        player.x += player.vx;
+        player.y += player.vy;
+        player.targetX = player.x;
+        player.targetY = player.y;
+        player.heading = Math.atan2(player.vy, player.vx);
+        player.walkCycle += dt * 12;
+
+        player.stepTimer += dt;
+        if (player.stepTimer > 0.35) {
+          audio.playStep();
+          player.stepTimer = 0;
+        }
+      } else {
+        const dx = player.targetX - player.x;
+        const dy = player.targetY - player.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist > 0.008) {
+          player.x += (dx / dist) * player.speed * 0.9;
+          player.y += (dy / dist) * player.speed * 0.9;
+          player.heading = Math.atan2(dy, dx);
+          player.walkCycle += dt * 10;
+
+          player.stepTimer += dt;
+          if (player.stepTimer > 0.36) {
+            audio.playStep();
+            player.stepTimer = 0;
+          }
+        } else {
+          player.walkCycle = 0;
+        }
+      }
+
+      player.x = Math.max(0.08, Math.min(0.92, player.x));
+      player.y = Math.max(0.12, Math.min(0.88, player.y));
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = '#0c101a';
+      ctx.fillRect(0, 0, w, h);
+
+      // Floor grid
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
+      ctx.lineWidth = 1;
+      const tileWidth = 60;
+      for (let x = 0; x < w; x += tileWidth) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+      }
+      for (let y = 0; y < h; y += tileWidth) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      // Connector pathways between 4 stations
+      ctx.strokeStyle = 'rgba(217, 119, 6, 0.12)';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(stations[0].x * w, stations[0].y * h);
+      ctx.lineTo(stations[1].x * w, stations[1].y * h);
+      ctx.lineTo(stations[3].x * w, stations[3].y * h);
+      ctx.lineTo(stations[2].x * w, stations[2].y * h);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      dustMotes.forEach(m => {
+        m.x += m.vx;
+        m.y += m.vy;
+        if (m.x < 0) m.x = 1;
+        if (m.x > 1) m.x = 0;
+        if (m.y < 0) m.y = 1;
+        if (m.y > 1) m.y = 0;
+
+        ctx.fillStyle = `rgba(245, 158, 11, ${m.alpha * 0.25})`;
+        ctx.beginPath();
+        ctx.arc(m.x * w, m.y * h, m.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      let closestStation = null;
+      let minDistance = 9999;
+
+      stations.forEach(s => {
+        const sx = s.x * w;
+        const sy = s.y * h;
+        const distPx = Math.hypot(player.x * w - sx, player.y * h - sy);
+
+        if (distPx < s.radius + 36 && distPx < minDistance) {
+          closestStation = s;
+          minDistance = distPx;
+        }
+
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+        ctx.beginPath();
+        ctx.arc(sx, sy + 6, s.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#141b2a';
+        ctx.strokeStyle = s.color + '66';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(sx, sy, s.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = s.color + '15';
+        ctx.beginPath();
+        ctx.arc(sx, sy, s.radius * 0.7, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 15px "Font Awesome 6 Free"';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        let unicode = '\uf007'; // User
+        if (s.id === 'projects') unicode = '\uf899'; // VR
+        if (s.id === 'tech') unicode = '\uf121'; // Code
+        if (s.id === 'contact') unicode = '\uf0e0'; // Mail
+        ctx.fillText(unicode, sx, sy);
+
+        ctx.font = '600 12px "Plus Jakarta Sans"';
+        ctx.fillStyle = '#f1f5f9';
+        ctx.fillText(s.name, sx, sy + s.radius + 18);
+        ctx.font = '400 10px "Plus Jakarta Sans"';
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillText(s.subtitle, sx, sy + s.radius + 32);
+      });
+
+      activeNearStation = closestStation;
+      const promptEl = document.getElementById('station-prompt');
+      const promptLabel = document.getElementById('station-prompt-label');
+      if (activeNearStation) {
+        promptEl.classList.remove('opacity-0', 'pointer-events-none');
+        promptLabel.textContent = `OPEN ${activeNearStation.name.toUpperCase()}`;
+      } else {
+        promptEl.classList.add('opacity-0', 'pointer-events-none');
+      }
+
+      const px = player.x * w;
+      const py = player.y * h;
+
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+      ctx.beginPath();
+      ctx.ellipse(px, py + 10, player.radius * 1.1, player.radius * 0.45, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      const bob = Math.sin(player.walkCycle) * 2;
+
+      if (Math.hypot(player.targetX - player.x, player.targetY - player.y) > 0.015) {
+        ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(player.targetX * w, player.targetY * h, 7 + Math.sin(now * 0.01) * 2, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      ctx.save();
+      ctx.translate(px, py + bob);
+
+      ctx.fillStyle = '#f59e0b';
+      ctx.beginPath();
+      ctx.arc(0, 0, player.radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#1e293b';
+      ctx.beginPath();
+      ctx.arc(0, 0, player.radius * 0.6, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#ffffff';
+      const lookX = Math.cos(player.heading) * 6;
+      const lookY = Math.sin(player.heading) * 6;
+      ctx.beginPath();
+      ctx.arc(lookX, lookY, 3.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+
+      requestAnimationFrame(renderStudioLoop);
+    }
+    requestAnimationFrame(renderStudioLoop);
+
+    const modal = document.getElementById('station-modal');
+    const modalContainer = document.getElementById('modal-container');
+    const modalTitle = document.getElementById('modal-title');
+    const modalSubtitle = document.getElementById('modal-subtitle');
+    const modalBadgeIcon = document.getElementById('modal-badge-icon');
+    const modalBody = document.getElementById('modal-body');
+
+    function openStationModal(station) {
+      modalTitle.textContent = station.name;
+      modalSubtitle.textContent = station.subtitle;
+      modalBadgeIcon.style.color = station.color;
+      modalBadgeIcon.style.borderColor = station.color + '40';
+      modalBadgeIcon.style.backgroundColor = station.color + '15';
+
+      if (station.id === 'about') renderAboutStation();
+      else if (station.id === 'projects') renderProjectsStation();
+      else if (station.id === 'tech') renderTechStation();
+      else if (station.id === 'contact') renderContactStation();
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => {
+        modalContainer.classList.remove('scale-95', 'opacity-0');
+        modalContainer.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+
+    function closeModal() {
+      modalContainer.classList.remove('scale-100', 'opacity-100');
+      modalContainer.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 180);
+    }
+    document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+
+    function renderAboutStation() {
+      const dev = PORTFOLIO_DATA.developer;
+      modalBody.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+          <div class="md:col-span-5 studio-card rounded-2xl p-5 border border-white/10 flex flex-col items-center text-center">
+            <div class="relative w-36 h-36 rounded-2xl overflow-hidden photo-frame mb-4 bg-slate-800">
+              <img 
+                id="modal-dev-photo" 
+                src="${dev.photo}" 
+                alt="${dev.name}" 
+                class="w-full h-full object-cover"
+                onerror="this.src='https://placehold.co/240x240/1e293b/e2e8f0?text=Ahmad+Al-Horani'"
+              >
+              <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-slate-900/80 backdrop-blur text-[10px] font-mono text-emerald-400 border border-white/10 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ACTIVE
+              </div>
+            </div>
+
+            <h3 class="text-base font-bold text-white">${dev.name}</h3>
+            <p class="text-xs text-amber-400 font-medium mb-3">${dev.title}</p>
+            <p class="text-[11px] text-slate-400 mb-4 flex items-center justify-center gap-1">
+              <i class="fas fa-map-marker-alt text-slate-500"></i> ${dev.location}
+            </p>
+
+            <div class="w-full p-2.5 rounded-xl bg-slate-900/80 border border-white/5 text-left mb-4">
+              <label class="block text-[10px] font-mono uppercase text-slate-400 mb-1 flex items-center justify-between">
+                <span>Custom Photo URL</span>
+                <span class="text-amber-400 font-normal">Editable</span>
+              </label>
+              <div class="flex gap-1.5">
+                <input 
+                  type="text" 
+                  id="custom-photo-input" 
+                  value="${dev.photo}" 
+                  placeholder="Paste image URL here..." 
+                  class="flex-1 px-2 py-1 bg-slate-800 border border-white/10 rounded text-[11px] text-slate-200 focus:outline-none focus:border-amber-400"
+                >
+                <button 
+                  onclick="updateDeveloperPhoto()" 
+                  class="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-[10px] rounded transition-colors"
+                >
+                  SET
+                </button>
+              </div>
+            </div>
+
+            <div class="w-full space-y-2 text-xs border-t border-white/5 pt-3">
+              ${dev.attributes.map(a => `
+                <div class="flex justify-between items-center text-left">
+                  <span class="text-slate-400 text-[11px]">${a.label}</span>
+                  <span class="font-mono text-slate-200 font-medium text-[11px]">${a.val}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="md:col-span-7 space-y-4">
+            <div class="studio-card rounded-2xl p-5 border border-white/10">
+              <h4 class="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold mb-2">Background & Focus</h4>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">
+                ${dev.bio}
+              </p>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                ${dev.projectRole}
+              </p>
+            </div>
+
+            <div class="studio-card rounded-2xl p-5 border border-white/10">
+              <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold mb-2">Academic Information</h4>
+              <ul class="text-xs text-slate-300 space-y-1.5">
+                <li><strong class="text-white">Institution:</strong> Multimedia University Cyberjaya</li>
+                <li><strong class="text-white">Faculty:</strong> Faculty of Computing and Informatics</li>
+                <li><strong class="text-white">Specialization:</strong> Bachelor of Multimedia (Virtual Reality)</li>
+                <li><strong class="text-white">Project Scope:</strong> Degree Final Year Project (FYP)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    window.updateDeveloperPhoto = function() {
+      const input = document.getElementById('custom-photo-input');
+      if (input && input.value.trim() !== '') {
+        const newUrl = input.value.trim();
+        PORTFOLIO_DATA.developer.photo = newUrl;
+        document.getElementById('header-avatar-img').src = newUrl;
+        document.getElementById('doc-avatar-img').src = newUrl;
+        const modalPhoto = document.getElementById('modal-dev-photo');
+        if (modalPhoto) modalPhoto.src = newUrl;
+        audio.playPop();
+        showToast("PHOTO UPDATED", "Profile photo refreshed", "fa-camera");
+      }
+    };
+
+    function renderProjectsStation() {
+      const p = PORTFOLIO_DATA.project;
+      modalBody.innerHTML = `
+        <div class="space-y-4">
+          <div class="studio-card rounded-2xl p-6 border border-white/10">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+              <div>
+                <h3 class="font-bold text-white text-lg tracking-tight">${p.title}</h3>
+                <p class="text-xs text-amber-400 font-medium mt-0.5">${p.category}</p>
+              </div>
+              <span class="text-xs font-mono px-2.5 py-1 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 font-medium">
+                ${p.role}
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+              ${p.desc}
+            </p>
+
+            <div class="bg-slate-900/80 rounded-xl p-4 border border-white/5 mb-4">
+              <span class="text-[11px] font-mono uppercase text-slate-400 font-semibold block mb-1.5">
+                <i class="fas fa-layer-group text-amber-400 mr-1.5"></i> Technical Architecture
+              </span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                ${p.technicalOverview}
+              </p>
+            </div>
+
+            <div class="mb-4">
+              <span class="text-[11px] font-mono uppercase text-slate-400 font-semibold block mb-2">Key Highlights</span>
+              <ul class="space-y-1.5 text-xs text-slate-300 list-disc list-inside">
+                ${p.highlights.map(h => `<li>${h}</li>`).join('')}
+              </ul>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5 mb-5">
+              ${p.tags.map(t => `<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-white/5">${t}</span>`).join('')}
+            </div>
+
+            <div class="flex items-center space-x-3 pt-3 border-t border-white/5 font-mono text-xs">
+              <a href="${p.github}" target="_blank" class="py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors font-medium flex items-center gap-2">
+                <i class="fab fa-github"></i> View GitHub Repository
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTechStation() {
+      let html = `
+        <div class="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-white/5 pb-4">
+          <p class="text-xs sm:text-sm text-slate-300">
+            Core technologies and toolkits applied in the development of Pasar Jawi VR.
+          </p>
+          <span class="text-xs font-mono text-amber-400 font-semibold">
+            UNITY 3D • C# • XR INTERACTION TOOLKIT
+          </span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      `;
+      PORTFOLIO_DATA.skills.forEach(s => {
+        html += `
+          <div class="studio-card rounded-2xl p-4 border border-white/10">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-medium text-white text-xs">${s.name}</span>
+              <span class="font-mono text-xs text-amber-400 font-bold">${s.level}%</span>
+            </div>
+            <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-white/5">
+              <div class="bg-gradient-to-r from-amber-500 to-amber-300 h-full rounded-full" style="width: ${s.level}%"></div>
+            </div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+      modalBody.innerHTML = html;
+    }
+
+    function renderContactStation() {
+      modalBody.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <div class="studio-card rounded-2xl p-5 border border-white/10">
+              <h4 class="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold mb-2">Direct Contact</h4>
+              <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                Available for VR development discussions, degree project presentations, and technical inquiries.
+              </p>
+              
+              <div class="space-y-2">
+                <button onclick="copyEmailToClipboard()" class="w-full py-2.5 px-3 rounded-xl bg-slate-900 border border-white/10 hover:border-amber-500/40 text-slate-200 flex items-center justify-between text-xs transition-colors">
+                  <span class="flex items-center gap-2"><i class="fas fa-envelope text-amber-400"></i> Contact Directly</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">COPY</span>
+                </button>
+                <a href="https://github.com/ParticularPerson" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-slate-900 border border-white/10 hover:border-white/20 text-slate-200 flex items-center justify-between text-xs transition-colors">
+                  <span class="flex items-center gap-2"><i class="fab fa-github text-slate-400"></i> github.com/ParticularPerson</span>
+                  <i class="fas fa-external-link-alt text-[10px] text-slate-500"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="studio-card rounded-2xl p-4 border border-amber-500/20 flex items-center justify-between">
+              <div>
+                <h5 class="text-xs font-bold text-white">Curriculum Vitae</h5>
+                <p class="text-[11px] text-slate-400">PDF Document</p>
+              </div>
+              <button onclick="showToast('CV READY', 'CV download action initialized...', 'fa-file-pdf')" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs transition-colors shadow-md">
+                <i class="fas fa-download mr-1"></i> Download CV
+              </button>
+            </div>
+          </div>
+
+          <div class="studio-card rounded-2xl p-5 border border-white/10">
+            <h4 class="text-xs font-mono uppercase tracking-wider text-slate-300 font-semibold mb-3 flex items-center gap-2">
+              <i class="fas fa-paper-plane text-amber-400"></i> Send a Message
+            </h4>
+            <form onsubmit="handleContactSubmit(event)" class="space-y-3">
+              <div>
+                <label class="block text-[11px] font-mono text-slate-400 mb-1">YOUR NAME</label>
+                <input type="text" required placeholder="Name / Organization" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-slate-200 text-xs focus:outline-none focus:border-amber-400">
+              </div>
+              <div>
+                <label class="block text-[11px] font-mono text-slate-400 mb-1">EMAIL ADDRESS</label>
+                <input type="email" required placeholder="email@example.com" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-slate-200 text-xs focus:outline-none focus:border-amber-400">
+              </div>
+              <div>
+                <label class="block text-[11px] font-mono text-slate-400 mb-1">MESSAGE</label>
+                <textarea rows="3" required placeholder="Project inquiries or message..." class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-slate-200 text-xs focus:outline-none focus:border-amber-400 resize-none"></textarea>
+              </div>
+              <button type="submit" class="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md transition-all">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      audio.playSoftClick();
+      showToast("MESSAGE SENT", "Your message has been sent!", "fa-check");
+      e.target.reset();
+    }
+
+    function populateDocumentView() {
+      const p = PORTFOLIO_DATA.project;
+      const projContainer = document.getElementById('doc-projects-container');
+      projContainer.innerHTML = `
+        <div class="studio-card rounded-2xl p-6 border border-white/10">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+            <h3 class="text-base font-bold text-white">${p.title}</h3>
+            <span class="text-xs font-mono text-amber-400">${p.category}</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3 font-medium">${p.role}</p>
+          <p class="text-xs sm:text-sm text-slate-300 mb-3 leading-relaxed">${p.desc}</p>
+          
+          <div class="bg-slate-900/60 p-3.5 rounded-xl border border-white/5 mb-3">
+            <span class="text-[10px] font-mono uppercase text-slate-400 block mb-1">Architecture & Implementation</span>
+            <p class="text-xs text-slate-300">${p.technicalOverview}</p>
+          </div>
+
+          <div class="mb-3">
+            <span class="text-[10px] font-mono uppercase text-slate-400 block mb-1.5">Key Highlights</span>
+            <ul class="text-xs text-slate-300 space-y-1 list-disc list-inside">
+              ${p.highlights.map(h => `<li>${h}</li>`).join('')}
+            </ul>
+          </div>
+
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            ${p.tags.map(t => `<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">${t}</span>`).join('')}
+          </div>
+
+          <div class="pt-3 border-t border-white/5">
+            <a href="${p.github}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-mono text-amber-400 hover:text-amber-300">
+              <i class="fab fa-github"></i> View GitHub Repository &rarr;
+            </a>
+          </div>
+        </div>
+      `;
+
+      const skillsContainer = document.getElementById('doc-skills-container');
+      skillsContainer.innerHTML = PORTFOLIO_DATA.skills.map(s => `
+        <div class="p-3.5 bg-slate-900/60 rounded-xl border border-white/5 flex items-center justify-between">
+          <span class="text-xs font-medium text-slate-200">${s.name}</span>
+          <span class="text-xs font-mono font-bold text-amber-400">${s.level}%</span>
+        </div>
+      `).join('');
+    }
+    populateDocumentView();
+
+    const docView = document.getElementById('document-view');
+    const docBtn = document.getElementById('document-toggle-btn');
+    const exitDocBtn = document.getElementById('exit-document-btn');
+
+    docBtn.addEventListener('click', () => {
+      audio.playSoftClick();
+      docView.classList.remove('hidden');
+    });
+
+    function exitDocumentView() {
+      audio.playStep();
+      docView.classList.add('hidden');
+    }
+    exitDocBtn.addEventListener('click', exitDocumentView);
+
+    window.copyEmailToClipboard = function() {
+      const email = "ahmad.alhorani.dev@gmail.com";
+      const el = document.createElement('input');
+      el.value = email;
+      document.body.appendChild(el);
+      el.select();
+      try {
+        document.execCommand('copy');
+        audio.playPop();
+        showToast("COPIED TO CLIPBOARD", email, "fa-copy");
+      } catch (err) {
+        showToast("EMAIL READY", email, "fa-envelope");
+      }
+      document.body.removeChild(el);
+    };
+
+    function showToast(title, msg, icon = "fa-bell") {
+      const banner = document.getElementById('toast-banner');
+      document.getElementById('toast-title').textContent = title;
+      document.getElementById('toast-msg').textContent = msg;
+      document.getElementById('toast-icon').className = `fas ${icon}`;
+
+      banner.classList.remove('opacity-0', 'translate-x-80');
+      banner.classList.add('opacity-100', 'translate-x-0');
+
+      setTimeout(() => {
+        banner.classList.remove('opacity-100', 'translate-x-0');
+        banner.classList.add('opacity-0', 'translate-x-80');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
